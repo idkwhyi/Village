@@ -1,0 +1,21 @@
+.item-container {
+    position: relative;
+    display: inline-block;
+}
+
+.item-container::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #229d7f; 
+    transition: width 0.3s ease;
+}
+
+.item-hovered::before {
+    width: 100%;
+}
+
+
