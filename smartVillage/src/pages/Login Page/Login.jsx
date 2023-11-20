@@ -1,6 +1,8 @@
 import './Login.css'
 
+
 const Login = () => {
+
     return (
         <div className='body'>
             
@@ -19,13 +21,13 @@ const Login = () => {
                     </div>
 
                     {/* Remember me dan Forget Password */}
-                    {/* <div className="remember-forget">
+                    <div className="remember-forget">
                         <label>
                             <input type="checkbox" />
                             Remember me
                         </label>
                         <a href="#">Forget Password</a>
-                    </div> */}
+                    </div>
 
                     {/* Tombol Login */}
                     <button type="submit" className="btn">
@@ -33,11 +35,11 @@ const Login = () => {
                     </button>
 
                     {/* Link untuk register */}
-                    {/* <div className="register-link">
+                    <div className="register-link">
                         <p>
-                            Sudah Punya Akun? <a href="#">Register</a>
+                            Belum Punya Akun? <a href="/register">Register</a>
                         </p>
-                    </div> */}
+                    </div>
                 </form>
             </div>
         </div>
