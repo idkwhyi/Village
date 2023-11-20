@@ -19,6 +19,9 @@ function Navbar() {
                     <li>
                         <NavbarList name="Market" link="/market"/>
                     </li>
+                    <li>
+                        <NavbarList name="Berita" link="/announcement"/>
+                    </li>
                 </ul>
             </div>
             <div>
@@ -29,7 +32,7 @@ function Navbar() {
                         </a>
                     </li>
                     <li>
-                        <button className="bg-slate-100 p-3 rounded-full" onClick={() => navigate("./register")}>DAFTAR</button>
+                        <button className="bg-slate-100 p-3 rounded-full" onClick={() => navigate("/register")}>DAFTAR</button>
                     </li>
                 </ul>
             </div>
