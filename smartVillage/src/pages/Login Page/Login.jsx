@@ -1,23 +1,26 @@
 import './Login.css'
 import React, { useState } from 'react';
-import { Axios } from 'axios';
+import Axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 
 const Login = () => {
     const navigate = useNavigate();
 
-    const [userData, setUserData] = React.useState([])
-
-    const [username, setUsername] = React.useState('')
+    const [nama, setNama] = React.useState('')
     const [password, setPassword] = React.useState('');
 
-    const handleOnclick = () => {
-        Axios.get('http://localhost:3001/login').then((response) => {
-            console.info("succes")    
-            setUserData(response.data)
+    const handleLogin = () => {
+        Axios.post('http://localhost:3001/login', {
+            nama: nama, 
+            password: password
+        }).then((response)=>{
+            if(response.data.message){
+                alert(response.data.message)
+            } else {
+                navigate('/')
+            }
         })
-        
     }
 
     return (
@@ -29,7 +32,7 @@ const Login = () => {
 
                     {/* Input untuk username */}
                     <div className="input-box">
-                        <input type="text" placeholder="Username" required onChange={(event) => setUsername(event.target.value)}/>
+                        <input type="text" placeholder="Username" required onChange={(event) => setNama(event.target.value)}/>
                     </div>
 
                     {/* Input untuk password */}
@@ -38,16 +41,12 @@ const Login = () => {
                     </div>
 
                     {/* Remember me dan Forget Password */}
-                    <div className="remember-forget">
-                        {/* <label>
-                            <input type="checkbox" />
-                            Remember me
-                        </label> */}
+                    {/* <div className="remember-forget">
                         <a href="#">Forget Password</a>
-                    </div>
+                    </div> */}
 
                     {/* Tombol Login */}
-                    <button type="submit" className="btn" onClick={handleOnclick}>
+                    <button type="submit" form="loginForm" className="btn" onClick={handleLogin}>
                         Login
                     </button>
 

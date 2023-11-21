@@ -37,14 +37,26 @@ app.post('/register', (req, res) => {
     )
 })
 
-app.get('/login', (req, res) => {
-    db.query('SELECT * FROM user_data', (err, result) => {
-        if(err) {
-            console.log(err);
-        } else {
-            res.send(result)
+app.post('/login', (req, res) => {
+    const nama = req.body.nama
+    const password = req.body.password
+
+    db.query(
+        'SELECT * FROM user_data WHERE nama=? AND password=?', 
+        [nama, password], 
+        (err, result) => {
+            if(err) {
+                res.send({err: err})
+            } 
+                
+            if(result.length > 0){
+                res.send(result)
+            } else {
+                res.send({message: "Wrong username/password"})
+            }
+            
         }
-    })
+    );
 })
 
 
