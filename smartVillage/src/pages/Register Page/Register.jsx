@@ -1,9 +1,13 @@
 import './Register.css'
 import React from 'react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Axios from 'axios'
 
 const Register = () => {
+
+    let navigate = useNavigate();
+    // let history = useHistory()
 
     const [nama, setNama] = React.useState('');
     const [jenisKelamin, setJenisKelamin] = React.useState('');
@@ -15,8 +19,6 @@ const Register = () => {
     const [konfirmasiPassword, setKonformasiPassword] = React.useState('');
 
     const registerAccount = () => {
-        console.log(nama)
-        // lakukan validasi password berdasarkan konformasi password yang dimiliki
         if (password == konfirmasiPassword) {
             // penjelasan Axios.post('PORT-database', 'body-yang-di-db)
             Axios.post('http://localhost:3001/register', {
@@ -28,8 +30,11 @@ const Register = () => {
                 nomorTelepon: nomorTelepon,
                 password: password,
             }).then(() => {
-                console.log('Success')
+                console.log("success")
+                // window.location.href = '/login';
             })
+            navigate('/login')
+            console.log("success")
         } else {
             alert("Password yang dimasukkan tidak sesuai dengan Konfirmasi Password")
         }
@@ -39,11 +44,12 @@ const Register = () => {
         <div className="body">
             <div className="wrapper-register">
                 <form className="register-form" action="">
-                    <h1>Register</h1>
+                    <h1 className='title'>Register</h1>
 
                     {/* Nama Panjang */}
                     <div className="input-box">
                         <div className="input-field">
+                            <label>Nama Lengkap</label>
                             <input
                                 type="text" placeholder="Nama Lengkap" required
                                 onChange={(event) => {setNama(event.target.value) }}
@@ -52,16 +58,23 @@ const Register = () => {
 
                         {/* Jenis kelamin */}
                         <div className="input-field">
-                            <input
-                                type="text" placeholder="Jenis Kelamin" required
-                                onChange={(event) => {setJenisKelamin(event.target.value) }}
-                            />
+                            <label>Jenis Kelamin</label> 
+                            <select
+                                value={jenisKelamin}
+                                onChange={(event) => {setJenisKelamin(event.target.value)}}
+                            >
+                                <option value="" disabled>Select Jenis Kelamin</option>
+                                <option value="Laki laki">Laki laki</option>
+                                <option value="Perempuan">Perempuan</option>
+                            </select>
+
                         </div>
                     </div>
 
                     {/* Alamat */}
                     <div className="input-box">
                         <div className="input-field">
+                        <label>Alamat</label>
                             <input
                                 type="text" placeholder="Alamat" required
                                 onChange={(event) => {setAlamat(event.target.value) }}
@@ -70,6 +83,7 @@ const Register = () => {
 
                         {/* Email */}
                         <div className="input-field">
+                            <label>Email</label>
                             <input
                                 type="email" placeholder="Email" required
                                 onChange={(event) => {setEmail(event.target.value) }}
@@ -80,6 +94,7 @@ const Register = () => {
                     {/* Tanggal Lahir */}
                     <div className="input-box">
                         <div className="input-field">
+                            <label>Tanggal Lahir</label>
                             <input
                                 type="date" placeholder="Tanggal Lahir" required
                                 onChange={(event) => {setTanggalLahir(event.target.value) }}
@@ -88,6 +103,7 @@ const Register = () => {
 
                         {/* Nomor Telpon */}
                         <div className="input-field">
+                            <label>Nomor Telepon</label>
                             <input
                                 type="text" placeholder="Nomor Telpon" required
                                 onChange={(event) => {setNomorTelepon(event.target.value) }}
@@ -98,6 +114,7 @@ const Register = () => {
                     {/* Password */}
                     <div className="input-box">
                         <div className="input-field">
+                            <label>Password</label>
                             <input
                                 type="password" placeholder="Password" required
                                 onChange={(event) => {setPassword(event.target.value) }}
@@ -106,6 +123,7 @@ const Register = () => {
 
                         {/* Konfirmasi Password */}
                         <div className="input-field">
+                            <label>Konfirmasi Password</label>
                             <input
                                 type="password" placeholder="Konfirmasi Password" required
                                 onChange={(event) => {setKonformasiPassword(event.target.value) }}
@@ -113,10 +131,11 @@ const Register = () => {
                         </div>
                     </div>
 
-                    <label>
-                        <input type="checkbox" />
-                        Saya dengan ini menyatakan bahwa informasi yang diberikan di atas
-                        adalah benar dan tepat
+                    <label className='checkbox-container'>
+                        <input type="checkbox"/>
+                            Saya dengan ini menyatakan bahwa informasi yang diberikan di atas
+                            adalah benar dan tepat
+                        
                     </label>
 
                     <button type="submit" className="btn" onClick={registerAccount}>

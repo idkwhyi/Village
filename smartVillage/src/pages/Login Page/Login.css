@@ -25,6 +25,10 @@
     justify-content: center;
 }
 
+.wrapper-login > form {
+    width: 300px;
+}
+
 .wrapper-login h1 {
     font-size: 36px;
     text-align: center;
@@ -53,26 +57,18 @@
     color: #fff;
 }
 
-/* .wrapper-login .remember-forget {
+.remember-forget {
     display: flex;
-    justify-content: space-between;
-    font-size: 14.15px;
-    margin: 15px 0 15px;
-} */
+    flex-direction: row;
+    justify-content: left;
+    /* align-items: flex-start; */
+    gap: 20px;
+    margin-block-end: 15px;
+}
 
-/* .remember-forget label input {
-    accent-color: #fff;
-    margin-right: 3px;
-} */
-
-/* .remember-forget a {
-    color: #fff;
-    text-decoration: none;
-} */
-
-/* .remember-forget a:hover {
+.remember-forget a:hover {
     text-decoration: underline;
-} */
+}
 
 .wrapper-login .btn {
     width: 100%;
@@ -86,6 +82,7 @@
     font-size: 16px;
     color: #333;
     font-weight: 600;
+    margin-block: 15px;
 }
 
 /* .wrapper-login .register-link {
@@ -98,8 +95,8 @@
     color: #fff;
     text-decoration: none;
     font-weight: 600;
-}
+}*/
 
 .register-link p a:hover {
     text-decoration: underline;
-} */
+} 

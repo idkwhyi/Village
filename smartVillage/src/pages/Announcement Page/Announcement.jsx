@@ -42,7 +42,7 @@ const Announcement = () => {
                             alt=""
                             className="profile-img"
                         />
-                        <span className="profile-name">Silvan Handrew</span>
+                        <span className="profile-name">Silvan Handrew Novarianto</span>
                     </div>
                 </div>
 
@@ -76,7 +76,7 @@ const Announcement = () => {
                             alt=""
                             className="profile-img"
                         />
-                        <span className="profile-name">Silvan Handrew</span>
+                        <span className="profile-name">Silvan Handrew Novarianto</span>
                     </div>
                 </div>
 
@@ -110,7 +110,7 @@ const Announcement = () => {
                             alt=""
                             className="profile-img"
                         />
-                        <span className="profile-name">Silvan Handrew</span>
+                        <span className="profile-name">Silvan Handrew Novarianto</span>
                     </div>
                 </div>
 
@@ -144,7 +144,7 @@ const Announcement = () => {
                             alt=""
                             className="profile-img"
                         />
-                        <span className="profile-name">Silvan Handrew</span>
+                        <span className="profile-name">Silvan Handrew Novarianto</span>
                     </div>
                 </div>
 

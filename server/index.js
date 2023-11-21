@@ -37,6 +37,16 @@ app.post('/register', (req, res) => {
     )
 })
 
+app.get('/login', (req, res) => {
+    db.query('SELECT * FROM user_data', (err, result) => {
+        if(err) {
+            console.log(err);
+        } else {
+            res.send(result)
+        }
+    })
+})
+
 
 const PORT = 3001;
 app.listen (PORT, () => {
