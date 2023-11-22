@@ -24,10 +24,10 @@ app.post('/register', (req, res) => {
     const password = req.body.password
 
     db.query(
-        'INSERT INTO user_data (nama, jenis_kelamin, alamat, email, tanggal_lahir, nomor_telepon, password) VALUES(?,?,?,?,?,?,?)', 
-        [nama, jenisKelamin, alamat, email, tanggalLahir, nomorTelepon, password], 
+        'INSERT INTO user_data (nama, jenis_kelamin, alamat, email, tanggal_lahir, nomor_telepon, password) VALUES(?,?,?,?,?,?,?)',
+        [nama, jenisKelamin, alamat, email, tanggalLahir, nomorTelepon, password],
         (err, result) => {
-            if (err){
+            if (err) {
                 console.log(err)
             } else {
                 res.send("Values Inserted")
@@ -42,19 +42,19 @@ app.post('/login', (req, res) => {
     const password = req.body.password
 
     db.query(
-        'SELECT * FROM user_data WHERE nama=? AND password=?', 
-        [nama, password], 
+        'SELECT * FROM user_data WHERE nama=? AND password=?',
+        [nama, password],
         (err, result) => {
-            if(err) {
-                res.send({err: err})
-            } 
-                
-            if(result.length > 0){
+            if (err) {
+                res.send({ err: err })
+            }
+
+            if (result.length > 0) {
                 res.send(result)
             } else {
-                res.send({message: "Wrong username/password"})
+                res.send({ message: "Wrong username/password" })
             }
-            
+
         }
     );
 })
@@ -70,10 +70,10 @@ app.post('/tambah', (req, res) => {
     const tanggalMasuk = req.body.tanggalMasuk
 
     db.query(
-        'INSERT INTO barang (nama_barang, jenis_produk, jumlah_stok, harga, keterangan_harga, tanggal_masuk) VALUES (?,?,?,?,?,?)', 
+        'INSERT INTO barang (nama_barang, jenis_produk, jumlah_stok, harga, keterangan_harga, tanggal_masuk) VALUES (?,?,?,?,?,?)',
         [namaProduk, jenisProduk, jumlahStok, harga, keteranganHarga, tanggalMasuk],
         (err, result) => {
-            if(err) {
+            if (err) {
                 console.log(err)
             } else {
                 res.send("Berhasil Memasukkan Data Barang")
@@ -85,7 +85,7 @@ app.post('/tambah', (req, res) => {
 
 app.get('/barang', (req, res) => {
     db.query('SELECT * FROM barang', (err, result) => {
-        if(err){
+        if (err) {
             console.log(err);
         } else {
             res.send(result)
@@ -93,15 +93,35 @@ app.get('/barang', (req, res) => {
     })
 })
 
-app.put('/update', (req, res) => {
+app.put('/update/', (req, res) => {
     const id = req.body.id
-    db.query()
+    const namaProduk = req.body.namaProduk
+    const jenisProduk = req.body.jenisProduk
+    const jumlahStok = req.body.jumlahStok
+    const harga = req.body.harga
+    const keteranganHarga = req.body.keteranganHarga
+    const tanggalMasuk = req.body.tanggalMasuk
+
+    db.query(
+        // 'UPDATE barang SET nama_barang=?, jenis_produk=?, jumlah_stok=?, harga=?, keterangan_harga=?, tanggal_masuk=? WHERE id=?',
+        `UPDATE barang SET nama_barang='${namaProduk}', jenis_produk='${jenisProduk}', jumlah_stok='${jumlahStok}', harga='${harga}', keterangan_harga='${keteranganHarga}', tanggal_masuk='${tanggalMasuk}' WHERE id=${id}`,
+        // [namaProduk, jenisProduk, jumlahStok, harga, keteranganHarga, tanggalMasuk, id],
+        (err, result) => {
+            if (err) {
+                console.error('Error updating data:', err);
+                res.status(500).send('Error updating data');
+            } else {
+                res.status(200).send('Data updated successfully');
+            }
+        }
+    );
+
 })
 
 
 
 
 const PORT = 3001;
-app.listen (PORT, () => {
+app.listen(PORT, () => {
     console.log('Your server is running on port' + PORT)
 })

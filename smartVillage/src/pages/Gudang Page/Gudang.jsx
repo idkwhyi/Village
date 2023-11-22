@@ -13,6 +13,13 @@ const Gudang = () => {
     const [harga, setHarga] = React.useState('')
     const [keteranganHarga, setKeteranganHarga] = React.useState('')
     const [tanggalMasuk, setTanggalMasuk] = React.useState('')
+    
+    const [updateNamaProduk, setUpdateNamaProduk] = React.useState('')
+    const [updateJenisProduk, setUpdateJenisProduk] = React.useState('')
+    const [updateJumlahStok, setUpdateJumlahStok] = React.useState('')
+    const [updateHarga, setUpdateHarga] = React.useState('')
+    const [updateKeteranganHarga, setUpdateKeteranganHarga] = React.useState('')
+    const [updateTanggalMasuk, setUpdateTanggalMasuk] = React.useState('')
 
     useEffect(() => {
         getData();
@@ -27,7 +34,7 @@ const Gudang = () => {
             console.error("Error fetching data: ", err);
         }
     }
-    
+
     const submitDataBarang = async () => {
         try {
             await Axios.post('http://localhost:3001/tambah', {
@@ -38,49 +45,83 @@ const Gudang = () => {
                 keteranganHarga: keteranganHarga,
                 tanggalMasuk: tanggalMasuk,
             })
-            
+
             console.log("success insert items data")
-            
+
             getData();
         } catch (err) {
             console.error("Error: ", err)
         }
     }
 
-    
-    
+    const updateDataBarang = (id) => {
+        Axios.put(`http://localhost:3001/update`, {
+                id:id,
+                namaProduk: updateNamaProduk,
+                jenisProduk: updateJenisProduk,
+                jumlahStok: updateJumlahStok,
+                harga: updateHarga,
+                keteranganHarga: updateKeteranganHarga,
+                tanggalMasuk: updateTanggalMasuk,
+        }).then(() => {
+            getData();
+        }).catch ((err) => {
+            console.error("Error updating data: ", err);
+        })
+    };
+    // const updateDataBarang = async (id) => {
+    //     try {
+    //         await Axios.put(`http://localhost:3001/update${id}`, {
+    //             // id: id,
+    //             namaProduk: updateNamaProduk,
+    //             jenisProduk: updateJenisProduk,
+    //             jumlahStok: updateJumlahStok,
+    //             harga: updateHarga,
+    //             keteranganHarga: updateKeteranganHarga,
+    //             tanggalMasuk: updateTanggalMasuk,
+    //         });
+
+    //         console.log("Success updating item data");
+
+    //         // Refresh data after updating
+    //         getData();
+    //     } catch (err) {
+    //         console.error("Error updating data: ", err);
+    //     }
+    // };
+
 
 
 
     return (
         <div className="gudang-container">
-            <Navbar/>
+            <Navbar />
             <div className="form-container drop-shadow-xl">
                 <h1 className="title">Daftar Barang</h1>
                 <div className="input-data">
                     <div className="input-container">
                         <label>Nama Produk</label>
-                        <input type="text" onChange={(e) => setNamaProduk(e.target.value)}/>
+                        <input type="text" onChange={(e) => setNamaProduk(e.target.value)} />
                     </div>
                     <div className="input-container">
                         <label>Jenis Produk</label>
-                        <input type="text" onChange={(e) => setJenisProduk(e.target.value)}/>
+                        <input type="text" onChange={(e) => setJenisProduk(e.target.value)} />
                     </div>
                     <div className="input-container">
                         <label>Jumlah Stok</label>
-                        <input type="number" onChange={(e) => setJumlahStok(e.target.value)}/>
+                        <input type="number" onChange={(e) => setJumlahStok(e.target.value)} />
                     </div>
                     <div className="input-container">
                         <label>Harga</label>
-                        <input type="text" onChange={(e) => setHarga(e.target.value)}/>
+                        <input type="text" onChange={(e) => setHarga(e.target.value)} />
                     </div>
                     <div className="input-container">
                         <label>Keterangan Harga</label>
-                        <input type="text" onChange={(e) => setKeteranganHarga(e.target.value)}/>
+                        <input type="text" onChange={(e) => setKeteranganHarga(e.target.value)} />
                     </div>
                     <div className="input-container">
                         <label>Tanggal Masuk</label>
-                        <input type="date" required onChange={(e) => setTanggalMasuk(e.target.value)}/>
+                        <input type="date" required onChange={(e) => setTanggalMasuk(e.target.value)} />
                     </div>
                 </div>
                 <button onClick={submitDataBarang}>Save</button>
@@ -88,46 +129,56 @@ const Gudang = () => {
             <div className="table">
                 <div className="title">Daftar Tabel Barang</div>
                 <div className="items-container">
-                {data.map((value) => {
-                    return (
-                        <div className="input-item-container" key={value.id}>
-                            <input 
-                                value={value.nama_barang}
-                                placeholder="Nama barang"
+                    {data.map((value) => {
+                        return (
+                            <div className="input-item-container" key={value.id}>
+                                <input
+                                    type="text"
+                                    placeholder={value.nama_barang}
+                                    onChange={(e) => setUpdateNamaProduk(e.target.value)}
                                 // disabled
-                            />
-                            <input 
-                                value={value.jenis_produk}
-                                placeholder="Jenis Produk"
+                                />
+                                <input
+                                    type="text"
+                                    placeholder={value.jenis_produk}
+                                    onChange={(e) => setUpdateJenisProduk(e.target.value)}
                                 // disabled
-                            />
-                            <input 
-                                value={value.jumlah_stok}
-                                placeholder="Jumlah Stock"
+                                />
+                                <input
+                                    type="number"
+                                    placeholder={value.jumlah_stok}
+                                    // placeholder="Jumlah Stock"
+                                    onChange={(e) => setUpdateJumlahStok(e.target.value)}
                                 // disabled
-                            />
-                            <input 
-                                value={value.harga}
-                                placeholder="Harga"
+                                />
+                                <input
+                                    type="text"
+                                    placeholder={value.harga}
+                                    // placeholder="Harga"
+                                    onChange={(e) => setUpdateHarga(e.target.value)}
                                 // disabled
-                            />
-                            <input 
-                                value={value.keterangan_harga}
-                                placeholder="Keterangan Harga"
+                                />
+                                <input
+                                    type="text"
+                                    placeholder={value.keterangan_harga}
+                                    // placeholder="Keterangan Harga"
+                                    onChange={(e) => setUpdateKeteranganHarga(e.target.value)}
                                 // disabled
-                            />
-                            <input 
-                                value={value.tanggal_masuk}
-                                placeholder="Tanggal Masuk"
+                                />
+                                <input
+                                    type="date"
+                                    placeholder={value.tanggal_masuk}
+                                    // placeholder="Tanggal Masuk"
+                                    onChange={(e) => setUpdateTanggalMasuk(e.target.value)}
                                 // disabled
-                            />
-                            <div className="button-container">
-                                <button className="update">Update</button>
-                                <button className="delete">Delete</button>
+                                />
+                                <div className="button-container">
+                                    <button className="update" onClick={() => updateDataBarang(value.id)}>Update</button>
+                                    <button className="delete">Delete</button>
+                                </div>
                             </div>
-                        </div>
-                    )
-                })}
+                        )
+                    })}
                     {/* <div className="input-item-container">
                         <input 
                             placeholder="Nama barang"
