@@ -93,6 +93,11 @@ app.get('/barang', (req, res) => {
     })
 })
 
+app.put('/update', (req, res) => {
+    const id = req.body.id
+    db.query()
+})
+
 
 
 

@@ -1,8 +1,7 @@
 import Navbar from "../../components/Navbar";
 import './Gudang.css'
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Axios from "axios";
-import axios from "axios";
 
 const Gudang = () => {
 
@@ -14,6 +13,20 @@ const Gudang = () => {
     const [harga, setHarga] = React.useState('')
     const [keteranganHarga, setKeteranganHarga] = React.useState('')
     const [tanggalMasuk, setTanggalMasuk] = React.useState('')
+
+    useEffect(() => {
+        getData();
+    }, []);
+
+    const getData = async () => {
+        try {
+            const response = await Axios.get('http://localhost:3001/barang');
+            setData(response.data);
+            console.log("Data retrieved successfully: ", response.data);
+        } catch (err) {
+            console.error("Error fetching data: ", err);
+        }
+    }
     
     const submitDataBarang = async () => {
         try {
@@ -25,20 +38,17 @@ const Gudang = () => {
                 keteranganHarga: keteranganHarga,
                 tanggalMasuk: tanggalMasuk,
             })
-            // .then(() => {
-                console.log("success insert items data")
-            // }).catch(error => {
-            //     console.error("Error submitting data: ", error)
-            // })
-            console.info("axios boom")
             
-            const response = await Axios.get('http://localhost:3001/barang')
-            setData(response.data) 
-            console.log("Data retrieved successfully: ", response.data)
+            console.log("success insert items data")
+            
+            getData();
         } catch (err) {
             console.error("Error: ", err)
         }
     }
+
+    
+    
 
 
 
