@@ -83,6 +83,16 @@ app.post('/tambah', (req, res) => {
     )
 })
 
+app.get('/barang', (req, res) => {
+    db.query('SELECT * FROM barang', (err, result) => {
+        if(err){
+            console.log(err);
+        } else {
+            res.send(result)
+        }
+    })
+})
+
 
 
 
