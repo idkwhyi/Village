@@ -13,7 +13,7 @@ const db = mysql.createConnection({
     database: 'smart_village_test',
 });
 
-// make a request from localhost:3001/create
+// REGISTER ROUTER HERE
 app.post('/register', (req, res) => {
     const nama = req.body.nama
     const jenisKelamin = req.body.jenisKelamin
@@ -22,7 +22,6 @@ app.post('/register', (req, res) => {
     const tanggalLahir = req.body.tanggalLahir
     const nomorTelepon = req.body.nomorTelepon
     const password = req.body.password
-    // const konfirmasiPassword = req.body.konformasiPassword
 
     db.query(
         'INSERT INTO user_data (nama, jenis_kelamin, alamat, email, tanggal_lahir, nomor_telepon, password) VALUES(?,?,?,?,?,?,?)', 
@@ -37,6 +36,7 @@ app.post('/register', (req, res) => {
     )
 })
 
+// LOGIN ROUTER HERE
 app.post('/login', (req, res) => {
     const nama = req.body.nama
     const password = req.body.password
@@ -58,6 +58,32 @@ app.post('/login', (req, res) => {
         }
     );
 })
+
+// GUDANG ROUTER HERE
+// post data barang
+app.post('/tambah', (req, res) => {
+    const namaProduk = req.body.namaProduk
+    const jenisProduk = req.body.jenisProduk
+    const jumlahStok = req.body.jumlahStok
+    const harga = req.body.harga
+    const keteranganHarga = req.body.keteranganHarga
+    const tanggalMasuk = req.body.tanggalMasuk
+
+    db.query(
+        'INSERT INTO barang (nama_barang, jenis_produk, jumlah_stok, harga, keterangan_harga, tanggal_masuk) VALUES (?,?,?,?,?,?)', 
+        [namaProduk, jenisProduk, jumlahStok, harga, keteranganHarga, tanggalMasuk],
+        (err, result) => {
+            if(err) {
+                console.log(err)
+            } else {
+                res.send("Berhasil Memasukkan Data Barang")
+            }
+        }
+
+    )
+})
+
+
 
 
 const PORT = 3001;

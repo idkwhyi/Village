@@ -7,6 +7,8 @@ import { useNavigate } from 'react-router-dom';
 const Login = () => {
     const navigate = useNavigate();
 
+    const [isLogin, setIsLogin] = useState(false)
+
     const [nama, setNama] = React.useState('')
     const [password, setPassword] = React.useState('');
 
@@ -18,10 +20,13 @@ const Login = () => {
             if(response.data.message){
                 alert(response.data.message)
             } else {
+                setIsLogin(!isLogin)
+                // updateLoginStatus(isLogin)
                 navigate('/')
             }
         })
     }
+
 
     return (
         <div className='body'>

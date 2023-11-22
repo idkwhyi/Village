@@ -1,0 +1,130 @@
+.gudang-container {
+    display: flex;
+    gap: 50px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.title {
+    font-size: 40px;
+    font-weight: 500;
+    margin-left: 40px;
+}
+
+.form-container {
+    margin-top: 100px;
+    background-color: #eaebed;
+    width: max-content;
+    display: flex;
+    flex-direction: column;
+    height: max-content;
+    padding: 25px;
+    border-radius: 20px;
+}
+.form-container > button {
+    width: 100px;
+    height: 40px;
+    background-color: rgb(117, 195, 250);
+    border: 1px solid white;
+    border-radius: 8px;
+    margin: 15px 45px;
+    padding: 5px 10px;
+}
+
+.input-data {
+    padding: 20px;
+    /* margin-block-start: 80px; */
+    width: 80vw;
+    height: max-content;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border-radius: 25px;
+    /* gap: 20px */
+
+    .input-container {
+        width: max-content;
+        height: max-content;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 25px;
+        text-align: left;
+    }
+
+    .input-container > label {
+        color: #717171;
+        font-size: 12px;
+    }
+    .input-container > input {
+        padding: 5px 10px;
+        font-size: 13px;
+        width: 200px;
+        border: 1px solid black;
+        border-radius: 8px;
+    }
+}
+.table {
+    /* background-color: rgb(206, 120, 181); */
+    width: 85vw;
+    height: max-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.items-container {
+    width: 100%;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    /* border-radius: 8px; */
+    /* border: 1px solid rgb(76, 76, 76); */
+}
+
+.input-item-container {
+    margin: 2.5px 0;
+    width: max-content;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    border: 1px solid rgb(191, 191, 191);
+    background-color: white;
+    .button-container {
+        width: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        background-color: whitesmoke;
+    }
+}
+.update {
+    width: 100px;
+    height: max-content;
+    border-radius: 3px;
+    background-color: #5cc593;
+}
+.delete {
+    width: 100px;
+    height: max-content;
+    border-radius: 3px;
+    background-color: #e06666;
+    /* color: white; */
+}
+
+.input-item-container > input {
+    background-color: #ffffff;
+    padding: 3px 10px;
+    font-size: 13px;
+    width: 150px;
+}
+
+.input-item-container > input::placeholder {
+    color: rgb(107, 107, 107);
+}
+
