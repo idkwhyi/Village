@@ -1,10 +1,10 @@
 import './Announcement.css'
 import Navbar from '../../components/Navbar';
-import petaniRungkad from "../../images/petaniRungkad.jpeg"
-import ciliwung from "../../images/ciliwungTapiKalasey.jpeg"
-import lahanAncur from "../../images/lahanAncur.jpg"
-import wargaBerlulah from "../../images/wargaBerulah.jpeg"
-import evan from "../../images/pembuatBeritaHoax.jpeg"
+import petaniRungkad from "../../images/image4.jpeg"
+import ciliwung from "../../images/image3.jpeg"
+import lahanAncur from "../../images/image2.jpg"
+import wargaBerlulah from "../../images/image5.jpeg"
+import users from "../../images/user.jpeg"
 
 const Announcement = () => {
     return (
@@ -38,7 +38,7 @@ const Announcement = () => {
                     </a>
                     <div className="profile">
                         <img
-                            src={evan}
+                            src={users}
                             alt=""
                             className="profile-img"
                         />
@@ -72,7 +72,7 @@ const Announcement = () => {
                     </a>
                     <div className="profile">
                         <img
-                            src={evan}
+                            src={users}
                             alt=""
                             className="profile-img"
                         />
@@ -106,7 +106,7 @@ const Announcement = () => {
                     </a>
                     <div className="profile">
                         <img
-                            src={evan}
+                            src={users}
                             alt=""
                             className="profile-img"
                         />
@@ -140,7 +140,7 @@ const Announcement = () => {
                     </a>
                     <div className="profile">
                         <img
-                            src={evan}
+                            src={users}
                             alt=""
                             className="profile-img"
                         />
