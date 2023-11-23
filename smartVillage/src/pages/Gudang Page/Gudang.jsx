@@ -13,7 +13,7 @@ const Gudang = () => {
     const [harga, setHarga] = React.useState('')
     const [keteranganHarga, setKeteranganHarga] = React.useState('')
     const [tanggalMasuk, setTanggalMasuk] = React.useState('')
-    
+
     const [updateNamaProduk, setUpdateNamaProduk] = React.useState('')
     const [updateJenisProduk, setUpdateJenisProduk] = React.useState('')
     const [updateJumlahStok, setUpdateJumlahStok] = React.useState('')
@@ -47,51 +47,46 @@ const Gudang = () => {
             })
 
             console.log("success insert items data")
-
+            window.location.reload()
+            setNamaProduk('')
+            setJenisProduk('')
+            setJumlahStok('')
+            setHarga('')
+            setKeteranganHarga('')
+            setTanggalMasuk('')
             getData();
         } catch (err) {
             console.error("Error: ", err)
         }
+        console.info(tanggalMasuk)
     }
 
     const updateDataBarang = (id) => {
         Axios.put(`http://localhost:3001/update`, {
-                id:id,
-                namaProduk: updateNamaProduk,
-                jenisProduk: updateJenisProduk,
-                jumlahStok: updateJumlahStok,
-                harga: updateHarga,
-                keteranganHarga: updateKeteranganHarga,
-                tanggalMasuk: updateTanggalMasuk,
+            id: id,
+            namaProduk: updateNamaProduk,
+            jenisProduk: updateJenisProduk,
+            jumlahStok: updateJumlahStok,
+            harga: updateHarga,
+            keteranganHarga: updateKeteranganHarga,
+            tanggalMasuk: updateTanggalMasuk,
         }).then(() => {
+            window.location.reload()
+            setUpdateNamaProduk('')
+            setUpdateJenisProduk('')
+            setUpdateJumlahStok('')
+            setUpdateHarga('')
+            setUpdateKeteranganHarga('')
+            setUpdateTanggalMasuk('')
             getData();
-        }).catch ((err) => {
+        }).catch((err) => {
             console.error("Error updating data: ", err);
         })
     };
-    // const updateDataBarang = async (id) => {
-    //     try {
-    //         await Axios.put(`http://localhost:3001/update${id}`, {
-    //             // id: id,
-    //             namaProduk: updateNamaProduk,
-    //             jenisProduk: updateJenisProduk,
-    //             jumlahStok: updateJumlahStok,
-    //             harga: updateHarga,
-    //             keteranganHarga: updateKeteranganHarga,
-    //             tanggalMasuk: updateTanggalMasuk,
-    //         });
 
-    //         console.log("Success updating item data");
-
-    //         // Refresh data after updating
-    //         getData();
-    //     } catch (err) {
-    //         console.error("Error updating data: ", err);
-    //     }
-    // };
-
-
-
+    const deleteDataBarang = (id) => {
+        Axios.delete(`http://localhost:3001/delete/${id}`).then(() => getData())
+    }
 
     return (
         <div className="gudang-container">
@@ -135,46 +130,48 @@ const Gudang = () => {
                                 <input
                                     type="text"
                                     placeholder={value.nama_barang}
+                                    // value={updateNamaProduk}
                                     onChange={(e) => setUpdateNamaProduk(e.target.value)}
                                 // disabled
                                 />
                                 <input
                                     type="text"
                                     placeholder={value.jenis_produk}
+                                    // value={updateJenisProduk}
                                     onChange={(e) => setUpdateJenisProduk(e.target.value)}
                                 // disabled
                                 />
                                 <input
                                     type="number"
                                     placeholder={value.jumlah_stok}
-                                    // placeholder="Jumlah Stock"
+                                    // value={updateJumlahStok}
                                     onChange={(e) => setUpdateJumlahStok(e.target.value)}
                                 // disabled
                                 />
                                 <input
                                     type="text"
                                     placeholder={value.harga}
-                                    // placeholder="Harga"
+                                    // value={updateHarga}
                                     onChange={(e) => setUpdateHarga(e.target.value)}
                                 // disabled
                                 />
                                 <input
                                     type="text"
                                     placeholder={value.keterangan_harga}
-                                    // placeholder="Keterangan Harga"
+                                    // value={updateKeteranganHarga}
                                     onChange={(e) => setUpdateKeteranganHarga(e.target.value)}
                                 // disabled
                                 />
                                 <input
                                     type="date"
-                                    placeholder={value.tanggal_masuk}
-                                    // placeholder="Tanggal Masuk"
+                                    // placeholder={value.tanggal_masuk}
+                                    value={value.tanggalMasuk}
                                     onChange={(e) => setUpdateTanggalMasuk(e.target.value)}
                                 // disabled
                                 />
                                 <div className="button-container">
                                     <button className="update" onClick={() => updateDataBarang(value.id)}>Update</button>
-                                    <button className="delete">Delete</button>
+                                    <button className="delete" onClick={() => deleteDataBarang(value.id)}>Delete</button>
                                 </div>
                             </div>
                         )
