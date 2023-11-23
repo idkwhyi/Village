@@ -22,7 +22,7 @@ const Login = () => {
             } else {
                 setIsLogin(!isLogin)
                 // updateLoginStatus(isLogin)
-                navigate('/')
+                navigate('/homeAfter')
             }
         })
     }

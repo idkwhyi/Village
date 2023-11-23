@@ -67,11 +67,12 @@ app.post('/tambah', (req, res) => {
     const jumlahStok = req.body.jumlahStok
     const harga = req.body.harga
     const keteranganHarga = req.body.keteranganHarga
-    const tanggalMasuk = req.body.tanggalMasuk
+    // const tanggalMasuk = req.body.tanggalMasuk
 
     db.query(
-        'INSERT INTO barang (nama_barang, jenis_produk, jumlah_stok, harga, keterangan_harga, tanggal_masuk) VALUES (?,?,?,?,?,?)',
-        [namaProduk, jenisProduk, jumlahStok, harga, keteranganHarga, tanggalMasuk],
+        'INSERT INTO barang (nama_barang, jenis_produk, jumlah_stok, harga, keterangan_harga) VALUES (?,?,?,?,?)',
+        [namaProduk, jenisProduk, jumlahStok, harga, keteranganHarga],
+        // [namaProduk, jenisProduk, jumlahStok, harga, keteranganHarga, tanggalMasuk],
         (err, result) => {
             if (err) {
                 console.log(err)

@@ -1,4 +1,5 @@
-import Navbar from "../../components/Navbar";
+// import Navbar from "../../components/Navbar";
+import NavbarAfterLogin from '../../components/NavbarAfterLogin';
 import './Gudang.css'
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
@@ -19,7 +20,7 @@ const Gudang = () => {
     const [updateJumlahStok, setUpdateJumlahStok] = React.useState('')
     const [updateHarga, setUpdateHarga] = React.useState('')
     const [updateKeteranganHarga, setUpdateKeteranganHarga] = React.useState('')
-    const [updateTanggalMasuk, setUpdateTanggalMasuk] = React.useState('')
+    // const [updateTanggalMasuk, setUpdateTanggalMasuk] = React.useState('')
 
     useEffect(() => {
         getData();
@@ -43,7 +44,7 @@ const Gudang = () => {
                 jumlahStok: jumlahStok,
                 harga: harga,
                 keteranganHarga: keteranganHarga,
-                tanggalMasuk: tanggalMasuk,
+                // tanggalMasuk: tanggalMasuk,
             })
 
             console.log("success insert items data")
@@ -69,7 +70,7 @@ const Gudang = () => {
             jumlahStok: updateJumlahStok,
             harga: updateHarga,
             keteranganHarga: updateKeteranganHarga,
-            tanggalMasuk: updateTanggalMasuk,
+            // tanggalMasuk: updateTanggalMasuk,
         }).then(() => {
             window.location.reload()
             setUpdateNamaProduk('')
@@ -77,7 +78,7 @@ const Gudang = () => {
             setUpdateJumlahStok('')
             setUpdateHarga('')
             setUpdateKeteranganHarga('')
-            setUpdateTanggalMasuk('')
+            // setUpdateTanggalMasuk('')
             getData();
         }).catch((err) => {
             console.error("Error updating data: ", err);
@@ -90,152 +91,131 @@ const Gudang = () => {
 
     return (
         <div className="gudang-container">
-            <Navbar />
-            <div className="form-container drop-shadow-xl">
-                <h1 className="title">Daftar Barang</h1>
-                <div className="input-data">
-                    <div className="input-container">
-                        <label>Nama Produk</label>
-                        <input type="text" onChange={(e) => setNamaProduk(e.target.value)} />
+            <NavbarAfterLogin/>
+            <div className="overflow-hidden">
+
+                <div className="form-container drop-shadow-lg">
+                    <h1 className="title">Daftar Barang</h1>
+                    <div className="input-data">
+                        <div className="input-container">
+                            <label>Nama Produk</label>
+                            <input type="text" onChange={(e) => setNamaProduk(e.target.value)} />
+                        </div>
+                        <div className="input-container">
+                            <label>Jenis Produk</label>
+                            <input type="text" onChange={(e) => setJenisProduk(e.target.value)} />
+                        </div>
+                        <div className="input-container">
+                            <label>Jumlah Stok</label>
+                            <input type="number" onChange={(e) => setJumlahStok(e.target.value)} />
+                        </div>
+                        <div className="input-container">
+                            <label>Harga</label>
+                            <input type="text" onChange={(e) => setHarga(e.target.value)} />
+                        </div>
+                        <div className="input-container">
+                            <label>Keterangan Harga</label>
+                            <input type="text" onChange={(e) => setKeteranganHarga(e.target.value)} />
+                        </div>
+                        {/* <div className="input-container">
+                            <label>Tanggal Masuk</label>
+                            <input type="date" required onChange={(e) => setTanggalMasuk(e.target.value)} />
+                        </div> */}
                     </div>
-                    <div className="input-container">
-                        <label>Jenis Produk</label>
-                        <input type="text" onChange={(e) => setJenisProduk(e.target.value)} />
-                    </div>
-                    <div className="input-container">
-                        <label>Jumlah Stok</label>
-                        <input type="number" onChange={(e) => setJumlahStok(e.target.value)} />
-                    </div>
-                    <div className="input-container">
-                        <label>Harga</label>
-                        <input type="text" onChange={(e) => setHarga(e.target.value)} />
-                    </div>
-                    <div className="input-container">
-                        <label>Keterangan Harga</label>
-                        <input type="text" onChange={(e) => setKeteranganHarga(e.target.value)} />
-                    </div>
-                    <div className="input-container">
-                        <label>Tanggal Masuk</label>
-                        <input type="date" required onChange={(e) => setTanggalMasuk(e.target.value)} />
-                    </div>
+                    <button onClick={submitDataBarang}>Save</button>
                 </div>
-                <button onClick={submitDataBarang}>Save</button>
-            </div>
-            <div className="table">
-                <div className="title">Daftar Tabel Barang</div>
-                <div className="items-container">
-                    {data.map((value) => {
-                        return (
-                            <div className="input-item-container" key={value.id}>
-                                <input
-                                    type="text"
-                                    placeholder={value.nama_barang}
-                                    // value={updateNamaProduk}
-                                    onChange={(e) => setUpdateNamaProduk(e.target.value)}
-                                // disabled
-                                />
-                                <input
-                                    type="text"
-                                    placeholder={value.jenis_produk}
-                                    // value={updateJenisProduk}
-                                    onChange={(e) => setUpdateJenisProduk(e.target.value)}
-                                // disabled
-                                />
-                                <input
-                                    type="number"
-                                    placeholder={value.jumlah_stok}
-                                    // value={updateJumlahStok}
-                                    onChange={(e) => setUpdateJumlahStok(e.target.value)}
-                                // disabled
-                                />
-                                <input
-                                    type="text"
-                                    placeholder={value.harga}
-                                    // value={updateHarga}
-                                    onChange={(e) => setUpdateHarga(e.target.value)}
-                                // disabled
-                                />
-                                <input
-                                    type="text"
-                                    placeholder={value.keterangan_harga}
-                                    // value={updateKeteranganHarga}
-                                    onChange={(e) => setUpdateKeteranganHarga(e.target.value)}
-                                // disabled
-                                />
-                                <input
-                                    type="date"
-                                    // placeholder={value.tanggal_masuk}
-                                    value={value.tanggalMasuk}
-                                    onChange={(e) => setUpdateTanggalMasuk(e.target.value)}
-                                // disabled
-                                />
-                                <div className="button-container">
-                                    <button className="update" onClick={() => updateDataBarang(value.id)}>Update</button>
-                                    <button className="delete" onClick={() => deleteDataBarang(value.id)}>Delete</button>
+                <div className="table">
+                    <div className="title">Daftar Tabel Barang</div>
+                    <div className="items-container">
+                    {/* ganti */}
+                        <div className="title-container">
+                            <input
+                                type="text"
+                                placeholder="Nama Produk"
+                                disabled
+                            />
+                            <input
+                                type="text"
+                                disabled
+                                placeholder="Jenis Produk"
+                            />
+                            <input
+                                type="number"
+                                disabled
+                                placeholder="Jumlah Stok"
+                            />
+                            <input
+                                type="text"
+                                disabled
+                                placeholder="Harga"
+                            />
+                            <input
+                                type="text"
+                                disabled
+                                placeholder="Keterangan Harga"
+                            />
+                            {/* <input
+                                // type="date"
+                                disabled
+                                placeholder="Tanggal Masuk"
+                            /> */}
+                            <div className="space"></div>
+                            <div className="space"></div>
+                        </div>
+                        {/* ganti */}
+                        {data.map((value) => {
+                            return (
+                                <div className="input-item-container" key={value.id}>
+                                    <input
+                                        type="text"
+                                        placeholder={value.nama_barang}
+                                        // value={updateNamaProduk}
+                                        onChange={(e) => setUpdateNamaProduk(e.target.value)}
+                                    // disabled
+                                    />
+                                    <input
+                                        type="text"
+                                        placeholder={value.jenis_produk}
+                                        // value={updateJenisProduk}
+                                        onChange={(e) => setUpdateJenisProduk(e.target.value)}
+                                    // disabled
+                                    />
+                                    <input
+                                        type="number"
+                                        placeholder={value.jumlah_stok}
+                                        // value={updateJumlahStok}
+                                        onChange={(e) => setUpdateJumlahStok(e.target.value)}
+                                    // disabled
+                                    />
+                                    <input
+                                        type="text"
+                                        placeholder={value.harga}
+                                        // value={updateHarga}
+                                        onChange={(e) => setUpdateHarga(e.target.value)}
+                                    // disabled
+                                    />
+                                    <input
+                                        type="text"
+                                        placeholder={value.keterangan_harga}
+                                        // value={updateKeteranganHarga}
+                                        onChange={(e) => setUpdateKeteranganHarga(e.target.value)}
+                                    // disabled
+                                    />
+                                    {/* <input
+                                        type="date"
+                                        // placeholder={value.tanggal_masuk}
+                                        value={value.tanggalMasuk}
+                                        onChange={(e) => setUpdateTanggalMasuk(e.target.value)}
+                                    // disabled
+                                    /> */}
+                                    <div className="button-container">
+                                        <button className="update" onClick={() => updateDataBarang(value.id)}>Update</button>
+                                        <button className="delete" onClick={() => deleteDataBarang(value.id)}>Delete</button>
+                                    </div>
                                 </div>
-                            </div>
-                        )
-                    })}
-                    {/* <div className="input-item-container">
-                        <input 
-                            placeholder="Nama barang"
-                            // disabled
-                        />
-                        <input 
-                            placeholder="Jenis Produk"
-                            // disabled
-                        />
-                        <input 
-                            placeholder="Jumlah Stock"
-                            // disabled
-                        />
-                        <input 
-                            placeholder="Harga"
-                            // disabled
-                        />
-                        <input 
-                            placeholder="Keterangan Harga"
-                            // disabled
-                        />
-                        <input 
-                            placeholder="Tanggal Masuk"
-                            // disabled
-                        />
-                        <div className="button-container">
-                            <button className="update">Update</button>
-                            <button className="delete">Delete</button>
-                        </div>
+                            )
+                        })}
                     </div>
-                    <div className="input-item-container">
-                        <input 
-                            placeholder="Nama barang"
-                            // disabled
-                        />
-                        <input 
-                            placeholder="Jenis Produk"
-                            // disabled
-                        />
-                        <input 
-                            placeholder="Jumlah Stock"
-                            // disabled
-                        />
-                        <input 
-                            placeholder="Harga"
-                            // disabled
-                        />
-                        <input 
-                            placeholder="Keterangan Harga"
-                            // disabled
-                        />
-                        <input 
-                            placeholder="Tanggal Masuk"
-                            // disabled
-                        />
-                        <div className="button-container">
-                            <button className="update">Update</button>
-                            <button className="delete">Delete</button>
-                        </div>
-                    </div> */}
                 </div>
             </div>
         </div>
